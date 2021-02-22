@@ -3,9 +3,9 @@ package org.sid.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.sid.entity.Transaction;
+
 import org.sid.entity.Wallet;
-import org.sid.exception.WalletException;import org.sid.repository.TransactionRepository;
+import org.sid.exception.WalletException;
 import org.sid.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

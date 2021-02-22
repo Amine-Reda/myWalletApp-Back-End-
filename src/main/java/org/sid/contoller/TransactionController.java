@@ -3,10 +3,9 @@ package org.sid.contoller;
 import javax.validation.Valid;
 
 import org.sid.entity.Transaction;
-import org.sid.entity.Wallet;
+
 import org.sid.service.TransactionService;
 import org.sid.service.ValidationErrorService;
-import org.sid.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +37,7 @@ public class TransactionController {
 	
 	@PostMapping("/{wallet_id}")
     public ResponseEntity<?> create(@PathVariable Long wallet_id,@Valid @RequestBody Transaction transaction,BindingResult result){
-	ResponseEntity errors=validationErrorService.validate(result);
+	ResponseEntity<?> errors=validationErrorService.validate(result);
 			if(errors!=null)return errors;
 	Transaction transactionSaved=transactionService.createOrUpdate(wallet_id,transaction);
 	return new ResponseEntity<Transaction>(transactionSaved,HttpStatus.CREATED);
@@ -46,11 +45,11 @@ public class TransactionController {
 	@DeleteMapping("/{wallet_id}/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id,@PathVariable Long wallet_id){
 		transactionService.delete(id,wallet_id);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@PutMapping("/{wallet_id}/{id}")
     public ResponseEntity<?> update(@PathVariable Long wallet_id,@PathVariable Long id,@Valid @RequestBody Transaction transaction,BindingResult result){
-	ResponseEntity errors=validationErrorService.validate(result);
+	ResponseEntity<?> errors=validationErrorService.validate(result);
 			if(errors!=null)return errors;
 	transaction.setId(id);
 	Transaction transactionSaved=transactionService.createOrUpdate(wallet_id,transaction);

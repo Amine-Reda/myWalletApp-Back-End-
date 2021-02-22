@@ -46,14 +46,14 @@ public class WalletController {
 	
 	@PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Wallet wallet,BindingResult result){
-	ResponseEntity errors=validationErrorService.validate(result);
+	ResponseEntity<?> errors=validationErrorService.validate(result);
 			if(errors!=null)return errors;
 	Wallet walletSaved=walletService.createOrUpdate(wallet);
 	return new ResponseEntity<Wallet>(walletSaved,HttpStatus.CREATED);
 }
 	@PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,@Valid @RequestBody Wallet wallet,BindingResult result){
-	ResponseEntity errors=validationErrorService.validate(result);
+	ResponseEntity<?> errors=validationErrorService.validate(result);
 			if(errors!=null)return errors;
 	wallet.setId(id);
 	Wallet walletSaved=walletService.createOrUpdate(wallet);
@@ -65,7 +65,7 @@ public class WalletController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		walletService.delete(id);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	
