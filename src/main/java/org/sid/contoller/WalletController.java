@@ -35,6 +35,7 @@ public class WalletController {
 
 	@GetMapping
 	public ResponseEntity<?> getAll(){
+		
 		return new ResponseEntity<>(walletService.getAll(),HttpStatus.OK);
 	}
 	
@@ -66,4 +67,6 @@ public class WalletController {
 		walletService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	
 }

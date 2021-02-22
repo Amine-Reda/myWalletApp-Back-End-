@@ -18,10 +18,16 @@ public class TransactionService {
 	@Autowired
 	private WalletRepository walletRepository;
 	
+	
+	
 	public List<Transaction> getAll(Long walletId){
+	
 		Optional<Wallet> wallet= walletRepository.findById(walletId);
+		
+		
 		if(wallet.isPresent()) {
-			return transactionRepository.findByWallet(wallet.get());	
+			return transactionRepository.findByWallet(wallet.get());
+			
 		}
 	return null;	
 	}
@@ -60,6 +66,12 @@ public class TransactionService {
 		throw new WalletException("Transaction with "+id+"does not exists!");
 		
 	}
+	
+  
+	
+
+	
+	
 	
 	
 	

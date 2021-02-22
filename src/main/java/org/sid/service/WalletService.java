@@ -3,8 +3,9 @@ package org.sid.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.sid.entity.Transaction;
 import org.sid.entity.Wallet;
-import org.sid.exception.WalletException;
+import org.sid.exception.WalletException;import org.sid.repository.TransactionRepository;
 import org.sid.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,10 @@ public class WalletService {
 	@Autowired
 	private WalletRepository walletRepository;
 	
+	
+	
 	public List<Wallet> getAll(){
+		
 		return walletRepository.findAllByOrderByPriority();
 	}
 	
@@ -46,5 +50,13 @@ public class WalletService {
 		}
 		throw new WalletException("wallet with "+id+"does not exists!");
 	}
+	
+	
 
+	
+
+	
+	
+	
 }
+
