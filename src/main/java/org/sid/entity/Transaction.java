@@ -10,11 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +27,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -39,17 +38,18 @@ public class Transaction {
 	@Min(1)
 	@Max(3)
 	private int type;
-	@JsonFormat(pattern = "yyyy-mm-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date transactionDate;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "wallet_id",nullable = false)
+	@JoinColumn(name = "wallet_id", nullable = false)
 	@JsonIgnore
 	private Wallet wallet;
-	
+
 	@PrePersist
+	@PreUpdate
 	public void setTransactionDate() {
-		this.transactionDate=new Date();
+		this.transactionDate = new Date();
 	}
 
 }
