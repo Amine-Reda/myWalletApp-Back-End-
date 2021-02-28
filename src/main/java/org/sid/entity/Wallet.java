@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
+import javax.persistence.PostLoad;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -47,7 +47,7 @@ public class Wallet {
 	@JsonIgnore
 	private List<Transaction> transactions = new ArrayList<>();
 
-	@PrePersist
+	@PostLoad
 	public void setBalance() {
 		this.currentBalance = 0.0;
 		for (Transaction transaction : this.transactions) {
