@@ -49,7 +49,14 @@ public class Wallet {
 
 	@PrePersist
 	public void setBalance() {
-		this.currentBalance = new Double(0);
+		this.currentBalance = 0.0;
+		for (Transaction transaction : this.transactions) {
+			if (transaction.getType() == 1) {
+				this.currentBalance += transaction.getAmount();
+			} else {
+				this.currentBalance -= transaction.getAmount();
+			}
+		}
 	}
 
 }
